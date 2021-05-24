@@ -1,16 +1,16 @@
 <nav class="tbk-header">
-	<div class="tbk-header-title">
-		<mat-icon>flight_takeoff</mat-icon>
-		{{title}}
-		<mat-icon>flight_land</mat-icon>
-	</div>
+    <div class="tbk-header-title">
+        <mat-icon>flight_takeoff</mat-icon>
+        {{title}}
+        <mat-icon>flight_land</mat-icon>
+    </div>
 
-	<div class="tbk-header-nav-link" >
-		<mat-icon>map</mat-icon>
-		<span class="tbk-header-nav-link-text">Voyages</span>
-	</div>
+    <div class="tbk-header-nav-link" >
+        <mat-icon>map</mat-icon>
+        <span class="tbk-header-nav-link-text">Voyages</span>
+    </div>
 
-	<div *ngIf="selectedTravel" class="tbk-nav-travel-name" >
-		<span class="tbk-header-nav-link-text">{{selectedTravel.countriesNames}}<br/>({{selectedTravel.departDate | date:"yyyy" }})</span>
-	</div>
+    <div *ngIf="selectedTravel" class="tbk-nav-travel-name" >
+        <span class="tbk-header-nav-link-text">{{selectedTravel.countriesNames}}<br/>({{selectedTravel.departDate | date:"yyyy" }})</span>
+    </div>
 </nav>

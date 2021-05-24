@@ -6,13 +6,13 @@ import {Country} from '../tbk-domains/Country';
 import {COUNTRIES} from '../mocks/mocks-country';
 
 @Injectable({
-  providedIn: 'root'
-})
-export class SrvCountriesService {
+    providedIn: 'root'
+    })
+    export class SrvCountriesService {
 
-  constructor() { }
+    constructor() { }
 
-  getCountries() : Observable<Country[]> {
-    return of(COUNTRIES);
-  }
+    getCountries() : Observable<Country[]> {
+        return of(COUNTRIES);
+    }
 }

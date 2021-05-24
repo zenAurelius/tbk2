@@ -21,29 +21,29 @@ import { TbkHeaderComponent } from './tbk-components/tbk-header/tbk-header.compo
 import { TbkTravelsComponent } from './tbk-components/tbk-travels/tbk-travels.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TbkHeaderComponent,
-    TbkTravelsComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    GoogleChartsModule,
-    HttpClientModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule
-  ],
-  providers: [
-    MatNativeDateModule,
-    { provide: LOCALE_ID, useValue: 'fr-FR' }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TbkHeaderComponent,
+        TbkTravelsComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        GoogleChartsModule,
+        HttpClientModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule
+    ],
+    providers: [
+        MatNativeDateModule,
+        { provide: LOCALE_ID, useValue: 'fr-FR' }
+    ],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }
