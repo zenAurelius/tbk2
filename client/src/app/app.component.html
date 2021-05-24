@@ -1,0 +1,9 @@
+<!---->
+<div>
+	<tbk-header title={{title}} [selectedTravel]="selectedTravel"></tbk-header>
+</div>
+<div class="main">
+	<tbk-travels	[countries] = 'countries'
+					(selectTravelEvent)="selectTravel($event)"
+	></tbk-travels>
+</div>

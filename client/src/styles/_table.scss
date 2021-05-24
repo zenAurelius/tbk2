@@ -1,0 +1,27 @@
+@use 'colors';
+
+$thBackground : colors.$policeColor;
+$rowBackground:#D0E4F7;
+$rowHoverBackground:#88C0F5;
+
+.tbk-table {
+    border-collapse: separate; 
+    border-spacing: 5px;
+    border: none;
+    width: 100%;
+	th {
+		background-color: $thBackground;
+		font-weight: normal;
+	}
+
+	tr.selectionnable {
+		&:hover {
+			background-color: $rowHoverBackground;
+		}
+		background-color: $rowBackground;
+	}
+
+	td span{
+		margin-left: 5px;
+	}
+}
