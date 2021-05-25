@@ -23,7 +23,19 @@ export class SrvTravelsService {
     addTravel(travel : Travel){
         console.log(travel);
         if(travel.returnDate && travel.departDate && travel.users){
-        this.travelData.push({_id:(this.travelData.length+1).toString(), users:[], countries:travel.countries, departDate:travel.departDate?.toISOString(), returnDate: travel.returnDate?.toISOString(), devises:[]});
+            this.travelData.push({_id:(this.travelData.length+1).toString(), users:[], countries:travel.countries, departDate:travel.departDate?.toISOString(), returnDate: travel.returnDate?.toISOString(), devises:[]});
+        }
+        console.log(this.travelData);
+    }
+
+    updateTravel(travel : Travel){
+        console.log(travel);
+        let modifiedTravel = this.travelData.find(t => t._id == travel._id);
+
+        if(modifiedTravel){
+            modifiedTravel.countries = travel.countries;
+            modifiedTravel.departDate = travel.departDate?.toISOString() || '';
+            modifiedTravel.returnDate = travel.returnDate?.toISOString() || '';
         }
         console.log(this.travelData);
     }

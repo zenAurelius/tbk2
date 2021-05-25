@@ -12,7 +12,7 @@
                     </thead>
                     <tbody id="travel_list_body">
                         <!--<tr data-ng-repeat="x in travelsListCtrl.travelsList" ng-click="travelsListCtrl.selectTravel(x)" id="t_{{$index}}" ng-class="{selectionnable: true, selected: x == travelsListCtrl.selectedTravel}">-->
-                        <tr *ngFor="let travel of travels" class='selectionnable' (click)="selectTravel(travel)">
+                        <tr *ngFor="let travel of travels" [ngClass]="{'selectionnable': true, 'selected': travel == selectedTravel}" (click)="selectTravel(travel)">
                             <td><span>{{ travel.countriesNames }}</span></td>
                             <td><span>{{ travel.usersNames }}</span></td>
                             <td><span>{{ travel.departDate | date : 'fullDate' }}</span></td>
@@ -24,7 +24,7 @@
 
                 <div class="actions">
                     <button type="button" class="bouton" id="add_travel" (click)="openAddTravel()">Ajouter</button>
-                    <button type="button" class="bouton" id="upd_travel" [disabled]="!selectedTravel" (click)="shownAction = 'update'">Modifier</button>
+                    <button type="button" class="bouton" id="upd_travel" [disabled]="!selectedTravel" (click)="openUpdateTravel()">Modifier</button>
                     <button type="button" class="bouton" id="del_travel" [disabled]="!selectedTravel" (click)="shownAction = 'delete'">Supprimer</button>
                 </div>
                 
@@ -37,7 +37,6 @@
                     
                     <form novalidate name="addForm">
                         <div layout='row' layout-fill layout-margin layout-align='start'>
-                            
                             <!--<md-datepicker ng-model="travelsListCtrl.addedTravel.departDate" ng-require></md-datepicker>-->
                             <mat-form-field appearance="fill">
                                 <mat-label>Date Départ :</mat-label>
@@ -53,14 +52,13 @@
                                 <mat-datepicker-toggle matSuffix [for]="picker_retour"></mat-datepicker-toggle>
                                 <mat-datepicker #picker_retour></mat-datepicker>
                             </mat-form-field>
-                    
 
                             <!--<md-select ng-model="travelsListCtrl.addedTravel.countries" ng-model-options="{trackBy: '$value._id'}" ng-require multiple>-->
                             <mat-form-field appearance="fill">
                                 <mat-label>Pays :</mat-label>
                                 <mat-select multiple [(ngModel)]="addedTravel.countries" name="countries">
                                     <mat-option *ngFor="let c of countries" [value]="c">
-                                        {{c.name}}
+                                        {{c.name_fr}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -84,16 +82,64 @@
 
                 <div *ngIf="shownAction == 'delete' && selectedTravel" class="modal-window">
             
-                    <div class="sheet-head">
-                        <div class="sheet-title">Supprimer un voyage</div>
+                    <div class="modal-header">
+                        <div class="modal-title">Supprimer un voyage</div>
+                    </div>
+                    <div class="modal-body">
+                        <span>Confirmer la suppression du voyage "{{selectedTravel.countriesNames}}"".</span>
+                        <div class="actions">
+                            <input type="button" value="Supprimer" class="bouton" (click)="deleteTravel()" />
+                            <button type="button" id="cancel_add_travel" class="bouton" (click)="shownAction = 'list'">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="shownAction == 'update' && addedTravel" class="modal-window">
+                    <div class="modal-header">
+                        <div class="modal-title">Modifier un voyage</div>
                     </div>
                     
-                    <span>Confirmer la suppression du voyage "{{selectedTravel.countriesNames}}"".</span>
-                    <div class="actions">
-                        <input type="button" value="Supprimer" class="bouton" (click)="deleteTravel()" />
-                        <button type="button" id="cancel_add_travel" class="bouton" (click)="shownAction = 'list'">Annuler</button>
-                    </div>
+                    <form novalidate name="updForm">
+                        <div layout='row' layout-fill layout-margin layout-align='start'>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Date Départ :</mat-label>
+                                <input matInput [matDatepicker]="picker_depart" [(ngModel)]="addedTravel.departDate" name="departDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker_depart"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_depart></mat-datepicker>
+                            </mat-form-field>
 
+                            <mat-form-field appearance="fill">
+                                <mat-label>Date Retour :</mat-label>
+                                <input matInput [matDatepicker]="picker_retour" [(ngModel)]="addedTravel.returnDate" name="returnDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker_retour"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_retour></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Pays :</mat-label>
+                                <mat-select multiple [(ngModel)]="addedTravel.countries" name="countries">
+                                    <mat-option *ngFor="let c of countries" [value]="c">
+                                        {{c.name_fr}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Avec :</mat-label>
+                                <mat-select multiple [(ngModel)]="addedTravel.users" name="users">
+                                    <mat-option *ngFor="let u of friends" [value]="u.firstname">
+                                        {{u.firstname}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="actions">
+                            <input type="button" value="Modifier" class="bouton" (click)="updateTravel()" ng-disabled="!addForm.$valid"/>
+                            <button type="button" id="cancel_add_travel" class="bouton" (click)="shownAction = 'action'">Annuler</button>
+                        </div>
+                       
+                    </form>
                 </div>
 
             </div>
@@ -106,14 +152,12 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Région :</mat-label>
                         <mat-select [(ngModel)]="mapOptions.region" name="mapRegion" (selectionChange)="onMapOptionChange()">
-                            <mat-option value='world'>Monde</mat-option>
-                            <mat-option *ngFor="let c of countries" [value]="c._id">
-                                {{c.name}}
+                            <mat-option *ngFor="let c of zones" [value]="c.code">
+                                {{c.name_fr}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
-                {{mapOptions.region}} - {{mapOptions.backgroundColor}}
             </div>
             <div class="card-body">
                 <div class="map-container">

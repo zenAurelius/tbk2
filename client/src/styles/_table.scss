@@ -3,6 +3,8 @@
 $thBackground : colors.$policeColor;
 $rowBackground:#D0E4F7;
 $rowHoverBackground:#88C0F5;
+$selectedBackground:#73B3F1;
+$selectedHoverBackground:#AB9077;
 
 .tbk-table {
     border-collapse: separate; 
@@ -19,6 +21,13 @@ $rowHoverBackground:#88C0F5;
 			background-color: $rowHoverBackground;
 		}
 		background-color: $rowBackground;
+	}
+
+	tr.selected {
+		background-color: $selectedBackground;
+		&.retrait {
+			background-color: $selectedHoverBackground;
+		}
 	}
 
 	td span{

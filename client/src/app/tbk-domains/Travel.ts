@@ -15,7 +15,7 @@ export class Travel {
                     public returnDate: Date | undefined,
                     public devises: any[]) 
     {
-        this.countriesNames = this.countries.map(c => c.name).join(', ');
+        this.countriesNames = this.countries.map(c => c.name_fr).join(', ');
                 
         this.users.forEach( u => {
             if(this.usersNames != null) { 

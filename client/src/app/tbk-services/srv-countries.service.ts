@@ -13,6 +13,10 @@ import {COUNTRIES} from '../mocks/mocks-country';
     constructor() { }
 
     getCountries() : Observable<Country[]> {
-        return of(COUNTRIES);
+        return of(COUNTRIES.filter(c => c.type == 4));
+    }
+
+    getZones() : Observable<Country[]> {
+        return of(COUNTRIES.filter(c => c.type < 4));
     }
 }

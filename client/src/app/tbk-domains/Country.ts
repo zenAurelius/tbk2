@@ -1,12 +1,11 @@
 export class Country {
 
-    constructor(	public _id: string | undefined,
-                    public type: string | undefined,
-                    public name: string | undefined,
-                    public cont?: string | undefined,
-                    public zone?: string | undefined,
-                    public _id_2?: string | undefined,
-                    public _id_3?: string | undefined
+    constructor(	public code: string,
+                    public type: number,
+                    public name_fr: string | undefined,
+                    public parent?: string | undefined,
+                    public name_en?: string | undefined,
+                    public m49?: string | undefined
                     )
     {
 

@@ -18,6 +18,7 @@ import { SrvTravelsService } from 'src/app/tbk-services/srv-travels.service';
 export class TbkTravelsComponent implements OnInit {
 
     @Input() countries : Country[] | undefined;
+    @Input() zones : Country[] | undefined;
     @Output() selectTravelEvent = new EventEmitter<Travel>();
     travels : Travel[] = [];
     selectedTravel : Travel | undefined;
@@ -26,11 +27,13 @@ export class TbkTravelsComponent implements OnInit {
     friends : any[] = [{firstname:'Dorine'}];
     
     type: ChartType = ChartType.GeoChart;
-    mapData :any[] = []; 
+    mapData :any[] = [];
+    mapColumns : any[] = [];
     mapHeight : number = 500;
     mapWidth : number = 1000;
     mapOptions = {
         region:'world',
+        resolution :'country',
         backgroundColor: '#81d4fa',
     };
 
@@ -48,26 +51,21 @@ export class TbkTravelsComponent implements OnInit {
             let data : any = {};
             this.travels.forEach(t => {
                 t.countries.forEach(c => {
-                data[c._id_2] = (data[c._id_2] || 0) + 1
+                    data[c.code] = data[c.code] || {'value':0, 'label':c.name_fr};
+                    data[c.code].value += 1;
                 });
             });
-        
-            this.mapData = Object.entries(data);
+            this.mapColumns = ['Country', 'Value', {role: 'tooltip', type:'string'}];
+            this.mapData = Object.entries(data).map(e => [{'v':e[0],'f':(<any>e[1]).label}, (<any>e[1]).value]);
+            console.log(this.mapData)
         });
 
     }
 
-    public selectTravel( travel : Travel ) {
+    public selectTravel( travel? : Travel ) {
         console.log(travel);
         this.selectTravelEvent.emit(travel);
         this.selectedTravel = travel;
-        //this.parent.setTravel(travel);
-        /*var mapObject = $('#map').vectorMap('get', 'mapObject');
-        mapObject.clearSelectedRegions();
-        if(travel) {
-        let countriesCode = travel.countries.map(function(e) {return e._id_2;});
-        mapObject.setSelectedRegions(countriesCode);
-        }*/
     }
 
     onMapOptionChange(){
@@ -78,25 +76,38 @@ export class TbkTravelsComponent implements OnInit {
     
 
     openAddTravel(){
-        console.log(1, this.shownAction, this.addedTravel);
         this.addedTravel = Travel.fromScratch();
-        console.log(2, this.shownAction, this.addedTravel);
         this.shownAction = 'add';
-        console.log(3, this.shownAction, this.addedTravel);
+    }
+
+    openUpdateTravel(){
+        this.addedTravel = Object.assign({}, this.selectedTravel);
+        this.shownAction = 'update';
     }
 
     addTravel(){
         //travel.users.push(this.parent.connectedUser);
         if(this.addedTravel) {
-        this.srvTravel.addTravel(this.addedTravel);
-        this.getTravels();
+            this.srvTravel.addTravel(this.addedTravel);
+            this.getTravels();
+            this.shownAction = 'list';
+        }
+    }
+
+    updateTravel(){
+        //travel.users.push(this.parent.connectedUser);
+        if(this.addedTravel) {
+            this.srvTravel.updateTravel(this.addedTravel);
+            this.getTravels();
+            this.shownAction = 'list';
         }
     }
 
     deleteTravel(){
         if(this.selectedTravel){
-        this.srvTravel.deleteTravel(this.selectedTravel);
-        this.getTravels();
+            this.srvTravel.deleteTravel(this.selectedTravel);
+            this.getTravels();
+            this.selectTravel();
         }
     }
 

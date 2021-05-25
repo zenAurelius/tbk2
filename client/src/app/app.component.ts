@@ -13,12 +13,15 @@ export class AppComponent {
     title : string = 'TBK (2)';
     selectedTravel : Travel | undefined;
     countries : Country[] | undefined;
+    zones : Country[] | undefined;
     
     constructor(private srvCountries : SrvCountriesService) { }
 
     ngOnInit(): void {
         this.srvCountries.getCountries()
-        .subscribe(countries => this.countries = countries);
+            .subscribe(countries => this.countries = countries);
+        this.srvCountries.getZones()
+            .subscribe(zones => this.zones = zones);
     }
 
     selectTravel(travel: Travel){
