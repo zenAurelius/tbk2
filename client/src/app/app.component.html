@@ -1,10 +1,15 @@
 <!---->
 <div>
-    <tbk-header title={{title}} [selectedTravel]="selectedTravel"></tbk-header>
+    <tbk-header title={{title}} [selectedTravel]="selectedTravel" (navEvent)="navigateTo($event)"></tbk-header>
 </div>
 <div class="main">
-    <tbk-travels	[countries] = 'countries'
+    <tbk-travels    *ngIf="page == 'TRAVELS'"
+                    [countries] = 'countries'
                     [zones] = 'zones'
-                    (selectTravelEvent)="selectTravel($event)"
-    ></tbk-travels>
+                    (selectTravelEvent)="selectTravel($event)">
+    </tbk-travels>
+
+    <tbk-detail     *ngIf="page == 'DETAIL' && selectedTravel">
+
+    </tbk-detail>
 </div>

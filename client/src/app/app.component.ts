@@ -14,6 +14,7 @@ export class AppComponent {
     selectedTravel : Travel | undefined;
     countries : Country[] | undefined;
     zones : Country[] | undefined;
+    page : string = 'TRAVELS';
     
     constructor(private srvCountries : SrvCountriesService) { }
 
@@ -27,6 +28,10 @@ export class AppComponent {
     selectTravel(travel: Travel){
         console.log('parent', travel);
         this.selectedTravel = travel;
+    }
+
+    navigateTo(destination: string){
+        this.page = destination;
     }
 
 
