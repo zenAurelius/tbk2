@@ -24,4 +24,8 @@ export class TbkHeaderComponent implements OnInit {
         this.navEvent.emit('DETAIL');
     }
 
+    goToTravels(): void{
+        this.navEvent.emit('TRAVELS');
+    }
+
 }
