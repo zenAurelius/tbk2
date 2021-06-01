@@ -3,9 +3,32 @@
 
         <div class="card">
             <div class="card-header">
-                <div class="card-title">BILAN</div>
+                <div class="card-title">LISTE DES EVENEMENTS</div>
             </div>
             <div class="card-body">
+                <div *ngIf="travel && travel.days">
+                    <div class='slider-container'>
+                        <button type="button" class="bouton" (click)="prevDay()">&lt;</button>
+                        <mat-slider
+                            class="slider"
+                            [max]='travel.days.length-1'
+                            min=0
+                            step=1
+                            thumbLabel tickInterval="1"
+                            [(ngModel)]="selectedDayIndex">
+                        </mat-slider>
+                        <button type="button" class="bouton" (click)="nextDay()">&gt;</button>
+                    </div>
+
+                    <table class="tbk-table">
+                        <thead>
+                            <tr><th colspan="5"><span>Opérations pour </span><span>{{ selectedDay()?.libelle }} : </span></th></tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    
+                </div>
             </div>
         </div>
 

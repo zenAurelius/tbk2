@@ -10,6 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSliderModule} from '@angular/material/slider'; 
 import {MatNativeDateModule } from '@angular/material/core';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,7 +40,8 @@ import { TbkDetailComponent } from './tbk-components/tbk-detail/tbk-detail.compo
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSliderModule
     ],
     providers: [
         MatNativeDateModule,

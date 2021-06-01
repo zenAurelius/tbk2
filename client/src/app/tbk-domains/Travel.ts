@@ -1,12 +1,12 @@
 
-//import { TravelDay } from './TravelDay';
+import { TravelDay } from './TravelDay';
 
 export class Travel {
     
     public countriesNames: string | undefined;
     public usersNames: string | undefined;
     public duration: number | undefined;
-    //public days: TravelDay[] | undefined;
+    public days: TravelDay[] = [];
     
     constructor(	public _id: string | undefined,
                     public users: any[],
@@ -32,7 +32,7 @@ export class Travel {
             this.duration = Math.round(difference_ms/ONE_DAY)
         }
         
-        //this.setTravelDays();
+        this.setTravelDays();
         if(!this.devises) {
             this.devises = [];
         }
@@ -53,15 +53,16 @@ export class Travel {
     }
     
     // SET TRAVEL DAYS ************************************************************************************************
-    /*public setTravelDays() {
+    public setTravelDays() {
         this.days= new Array<TravelDay>();
-        
-        var curday = new Date(this.departDate);
-        this.days.push(new TravelDay(new Date(this.departDate), 'avant le départ', false));
-        while(curday <= this.returnDate) {
-            this.days.push(new TravelDay(new Date(curday), curday.toLocaleDateString(), true));
-            curday.setDate(curday.getDate() + 1);
+        if(this.departDate && this.returnDate){
+            var curday = new Date(this.departDate);
+            this.days.push(new TravelDay(new Date(this.departDate), 'avant le départ', false));
+            while(curday <= this.returnDate) {
+                this.days.push(new TravelDay(new Date(curday), curday.toLocaleDateString(), true));
+                curday.setDate(curday.getDate() + 1);
+            }
+            this.days.push(new TravelDay(new Date(curday), 'après le retour', false));
         }
-        this.days.push(new TravelDay(new Date(curday), 'après le retour', false));
-    }*/
+    }
 }

@@ -9,7 +9,7 @@
                     (selectTravelEvent)="selectTravel($event)">
     </tbk-travels>
 
-    <tbk-detail     *ngIf="page == 'DETAIL' && selectedTravel">
-
+    <tbk-detail     *ngIf="page == 'DETAIL' && selectedTravel"
+                    [travel] = 'selectedTravel'>
     </tbk-detail>
 </div>
