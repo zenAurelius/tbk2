@@ -4,11 +4,16 @@
   "description": "Travel Book Keeping",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon ./server.js localhost 3080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ZenAurelius",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

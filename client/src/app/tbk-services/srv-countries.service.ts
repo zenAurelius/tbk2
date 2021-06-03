@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 
@@ -10,13 +11,17 @@ import {COUNTRIES} from '../mocks/mocks-country';
     })
     export class SrvCountriesService {
 
-    constructor() { }
+    countries : Country[] = [];
+
+    constructor(private http: HttpClient) { }
 
     getCountries() : Observable<Country[]> {
-        return of(COUNTRIES.filter(c => c.type == 4));
+        return this.http.get<Country[]>('/api/countries');
+        //return of(COUNTRIES.filter(c => c.type == 4));
     }
 
     getZones() : Observable<Country[]> {
-        return of(COUNTRIES.filter(c => c.type < 4));
+        return this.http.get<Country[]>('/api/zones');
+        //return of(COUNTRIES.filter(c => c.type < 4));
     }
 }

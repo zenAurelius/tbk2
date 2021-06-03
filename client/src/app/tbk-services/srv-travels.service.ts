@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, pipe } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 import { Travel } from '../tbk-domains/Travel';
 import {TRAVELS} from '../mocks/mocks-travel';
+import { TravelDay } from '../tbk-domains/TravelDay';
 
 @Injectable({
     providedIn: 'root'
@@ -13,11 +15,11 @@ export class SrvTravelsService {
 
     travelData = TRAVELS;
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     getTravels() : Observable<Travel[]> {
-        let travels = this.travelData.map(t => Travel.fromData(t));
-        return of(travels);
+        return this.http.get<Travel[]>('/api/users/1/travels')
+            .pipe(map(data => data.map(t =>Travel.fromData(t))));
     }
 
     addTravel(travel : Travel){

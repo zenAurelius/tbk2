@@ -50,6 +50,8 @@ export class TbkTravelsComponent implements OnInit {
             this.travels = travels;
             let data : any = {};
             this.travels.forEach(t => {
+                t.countries = t.countries.map(c => this.countries?.find(co => co.code == c));
+                t.countriesNames = t.countries.map(c => c.name_fr).join(', ');
                 t.countries.forEach(c => {
                     data[c.code] = data[c.code] || {'value':0, 'label':c.name_fr};
                     data[c.code].value += 1;
