@@ -1,14 +1,16 @@
+import { Evenement } from "./Evenement";
+
 export class TravelDay {
 	date: Date;
 	libelle: string;
 	isFixDate: boolean;
-	operations: any[];
+	evenements: Evenement[];
 	
 	constructor(date: Date, libelle: string, isFixDate: boolean) {
 		this.date = date;
 		this.libelle = libelle;
 		this.isFixDate = isFixDate;
-		this.operations = [];
+		this.evenements = [];
 	}
 
 }

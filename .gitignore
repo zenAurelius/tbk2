@@ -43,4 +43,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-client/src/app/mocks/countries.json
+
+# data
+client/src/app/mocks/*.json
+server/utils/travels.json

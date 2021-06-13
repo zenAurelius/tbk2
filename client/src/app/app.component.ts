@@ -26,7 +26,6 @@ export class AppComponent {
     }
 
     selectTravel(travel: Travel){
-        console.log('parent', travel);
         this.selectedTravel = travel;
     }
 

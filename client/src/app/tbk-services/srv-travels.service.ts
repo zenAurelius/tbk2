@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, pipe } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 
 import { Travel } from '../tbk-domains/Travel';
 import {TRAVELS} from '../mocks/mocks-travel';
@@ -14,40 +14,47 @@ import { TravelDay } from '../tbk-domains/TravelDay';
 export class SrvTravelsService {
 
     travelData = TRAVELS;
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      };
 
     constructor(private http: HttpClient) { }
 
     getTravels() : Observable<Travel[]> {
-        return this.http.get<Travel[]>('/api/users/1/travels')
+        return this.http.get<Travel[]>('/api/users/597ed1479cc86d2a30a3650e/travels')
             .pipe(map(data => data.map(t =>Travel.fromData(t))));
     }
 
     addTravel(travel : Travel){
-        console.log(travel);
-        if(travel.returnDate && travel.departDate && travel.users){
-            this.travelData.push({_id:(this.travelData.length+1).toString(), users:[], countries:travel.countries, departDate:travel.departDate?.toISOString(), returnDate: travel.returnDate?.toISOString(), devises:[]});
-        }
-        console.log(this.travelData);
+        let travelData = {users:["1"], countries:travel.countries.map(c=>c.code), departDate:travel.departDate?.toISOString(), returnDate: travel.returnDate?.toISOString(), devises:[]};
+        return this.http.post('/api/travels', travelData, this.httpOptions)
+            .pipe(
+                catchError(this.handleError('addTravel'))
+            );;
+    }
+
+    private handleError<T>(operation = 'operation', result?: any) {
+        return (error: any): Observable<T> => {
+                console.error(error);
+                return of(result as T);
+        };
     }
 
     updateTravel(travel : Travel){
-        console.log(travel);
-        let modifiedTravel = this.travelData.find(t => t._id == travel._id);
-
-        if(modifiedTravel){
-            modifiedTravel.countries = travel.countries;
-            modifiedTravel.departDate = travel.departDate?.toISOString() || '';
-            modifiedTravel.returnDate = travel.returnDate?.toISOString() || '';
-        }
-        console.log(this.travelData);
+        let travelData = {id:travel.id?.toString(), users:["1"], countries:travel.countries.map(c=>c.code), departDate:travel.departDate?.toISOString(), returnDate: travel.returnDate?.toISOString(), devises:[]};
+        return this.http.put(`/api/travels/`, travelData, this.httpOptions)
+            .pipe(
+                tap(_ => `update travel id=${travel.id}`),
+                catchError(this.handleError<Travel>('updateTravel'))
+            );
     }
 
     deleteTravel(travel : Travel){
-        console.log('delete', this.travelData);
-        console.log(this.travelData.findIndex(t => t._id == travel._id));
-        console.log(this.travelData.slice(3,1));
-        this.travelData.splice(this.travelData.findIndex(t => t._id == travel._id),1);
-        console.log('delete', this.travelData);
+        return this.http.delete<Travel>(`/api/travels/${travel.id}`, this.httpOptions)
+            .pipe(
+                tap(_ => `deleted travel id=${travel.id}`),
+                catchError(this.handleError<Travel>('deleteTravel'))
+            );
     }
 
 }

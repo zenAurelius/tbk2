@@ -22,9 +22,14 @@
 
                     <table class="tbk-table">
                         <thead>
-                            <tr><th colspan="5"><span>Opérations pour </span><span>{{ selectedDay()?.libelle }} : </span></th></tr>
+                            <tr><th colspan="5"><span>Evénements du </span><span>{{ selectedDay()?.libelle }} : </span></th></tr>
                         </thead>
                         <tbody>
+                            <tr *ngFor="let evt of selectedDay().evenements" [ngClass]="{'selectionnable': true, 'selected': evt == selectedEvenement}" (click)="selectEvenement(evt)">
+                                <td><span>{{ evt.description }}</span></td>
+                                <td><span>{{ evt.type }}</span></td>
+                                <td><span>{{ evt.date | date : 'fullDate' }}</span></td>
+                            </tr>
                         </tbody>
                     </table>
                     

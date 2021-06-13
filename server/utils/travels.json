@@ -1,6 +1,382 @@
 [
-	{"_id":"1", "users":["1"], "countries":["US"], "departDate":"2008-12-12", "returnDate": "2008-12-20", "devises":[]},
-	{"_id":"2", "users":["1","2"], "countries":["JP"], "departDate":"2006-12-12", "returnDate": "2006-12-20", "devises":[]},
-	{"_id":"3", "users":["1","2"], "countries":["JP"], "departDate":"2018-04-26", "returnDate": "2018-05-10", "devises":[]},
-	{"_id":"4", "users":["1","2"], "countries":["JP", "KR"], "departDate":"2009-12-12", "returnDate": "2009-12-20", "devises":[]}
+    {
+        "id": "59b4e382f8a2c43298eefe8b",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "CA",
+            "US"
+        ],
+        "departDate": "2017-08-01T22:00:00.000Z",
+        "returnDate": "2017-08-24T22:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            },
+            {
+                "code": "CAD",
+                "sym": "$"
+            },
+            {
+                "code": "USD",
+                "sym": "$"
+            }
+        ]
+    },
+    {
+        "id": "59b69bf5ccd8770004486937",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "JP"
+        ],
+        "departDate": "2016-07-18T22:00:00.000Z",
+        "returnDate": "2016-08-11T22:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            },
+            {
+                "code": "JPY",
+                "sym": "¥"
+            }
+        ]
+    },
+    {
+        "id": "59b6a110ccd8770004486939",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "PL"
+        ],
+        "departDate": "2016-04-02T22:00:00.000Z",
+        "returnDate": "2016-04-08T22:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            }
+        ]
+    },
+    {
+        "id": "59b787b812dd7e0004810839",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "US"
+        ],
+        "departDate": "2015-04-25T22:00:00.000Z",
+        "returnDate": "2015-04-30T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b7881512dd7e000481083a",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "GE",
+            "AM"
+        ],
+        "departDate": "2015-07-21T22:00:00.000Z",
+        "returnDate": "2015-08-05T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b7885912dd7e000481083b",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "IT"
+        ],
+        "departDate": "2014-10-25T22:00:00.000Z",
+        "returnDate": "2014-10-30T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b788b412dd7e000481083c",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "KR"
+        ],
+        "departDate": "2014-04-19T22:00:00.000Z",
+        "returnDate": "2014-05-01T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b78af412dd7e000481083d",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "US"
+        ],
+        "departDate": "2013-04-13T22:00:00.000Z",
+        "returnDate": "2013-04-25T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b78e2512dd7e000481083e",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "GR"
+        ],
+        "departDate": "2013-10-20T22:00:00.000Z",
+        "returnDate": "2013-10-31T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b7918a12dd7e0004810840",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "US"
+        ],
+        "departDate": "2011-04-16T22:00:00.000Z",
+        "returnDate": "2011-04-27T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b791cf12dd7e0004810841",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "UA"
+        ],
+        "departDate": "2012-08-01T22:00:00.000Z",
+        "returnDate": "2012-08-22T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b7920812dd7e0004810842",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "CN"
+        ],
+        "departDate": "2011-02-18T23:00:00.000Z",
+        "returnDate": "2011-03-04T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b7923e12dd7e0004810843",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "DE"
+        ],
+        "departDate": "2011-12-18T23:00:00.000Z",
+        "returnDate": "2011-12-22T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b7928612dd7e0004810844",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "ID"
+        ],
+        "departDate": "2010-07-08T22:00:00.000Z",
+        "returnDate": "2010-08-01T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59b792d812dd7e0004810845",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "PT"
+        ],
+        "departDate": "2009-12-24T23:00:00.000Z",
+        "returnDate": "2009-12-31T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59ec99421b6f350004b12345",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "IT"
+        ],
+        "departDate": "2017-10-23T22:00:00.000Z",
+        "returnDate": "2017-11-01T23:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            }
+        ]
+    },
+    {
+        "id": "59fe0275a4bf210004056021",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "GB"
+        ],
+        "departDate": "2012-03-01T23:00:00.000Z",
+        "returnDate": "2012-03-04T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59fe02c5a4bf210004056022",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "US"
+        ],
+        "departDate": "2007-10-26T22:00:00.000Z",
+        "returnDate": "2007-11-05T23:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59fe032aa4bf210004056023",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "LV",
+            "UZ"
+        ],
+        "departDate": "2008-07-15T22:00:00.000Z",
+        "returnDate": "2008-08-07T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "59fe03f5a4bf210004056024",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "US"
+        ],
+        "departDate": "2009-04-18T22:00:00.000Z",
+        "returnDate": "2009-05-01T22:00:00.000Z",
+        "devises": []
+    },
+    {
+        "id": "5abb828be34dae0004eaed49",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "JP"
+        ],
+        "departDate": "2018-04-25T22:00:00.000Z",
+        "returnDate": "2018-05-10T22:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            },
+            {
+                "code": "YEN",
+                "sym": "¥"
+            }
+        ]
+    },
+    {
+        "id": "5c25fd86635f1000041d152c",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "GR"
+        ],
+        "departDate": "2018-10-20T22:00:00.000Z",
+        "returnDate": "2018-10-31T23:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            }
+        ]
+    },
+    {
+        "id": "5d5c24058d15ba000467070b",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "RU"
+        ],
+        "departDate": "2019-07-21T22:00:00.000Z",
+        "returnDate": "2019-08-12T22:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            },
+            {
+                "code": "RUB",
+                "sym": "₽"
+            }
+        ]
+    },
+    {
+        "id": "5df39e2a5eb0dc0004b2b9ee",
+        "users": [
+            "597ed1479cc86d2a30a3650e",
+            "597ecfec9cc86d2a30a3650d"
+        ],
+        "countries": [
+            "IE",
+            "US"
+        ],
+        "departDate": "2019-10-19T22:00:00.000Z",
+        "returnDate": "2019-11-01T23:00:00.000Z",
+        "devises": [
+            {
+                "code": "EUR",
+                "sym": "€"
+            },
+            {
+                "code": "USD",
+                "sym": "$"
+            }
+        ]
+    }
 ]

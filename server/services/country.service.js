@@ -9,17 +9,13 @@ module.exports = service;
 var countries;
 
 function list() {
-	if(!countries){
-		loadCountries();
-	}
-	return Promise.resolve(countries.filter(c => c.type == 4));
+	if(!countries) loadCountries();
+	return Promise.resolve(countries.filter(c => c.type == 4).sort((a,b) => {return a.name_fr.localeCompare(b.name_fr);}));
 }
 
 function zones() {
-	if(!countries){
-		loadCountries();
-	}
-	return Promise.resolve(countries.filter(c => c.type < 4));
+	if(!countries) loadCountries();
+	return Promise.resolve(countries.filter(c => c.type < 4).sort((a,b) => {return a.name_fr.localeCompare(b.name_fr);}));
 }
 
 function loadCountries(){

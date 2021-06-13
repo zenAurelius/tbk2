@@ -1,17 +1,12 @@
-
-//var Q = require('q');
-//var dbProvider = require('../utils/dbProvider');
 var fs = require('fs');
 
 var service = {};
 service.list = list;
-//service.add = add;
-//service.update = update;
-//service.deleteTravel = deleteTravel;
-
+service.add = add;
+service.update = update;
+service.deleteTravel = deleteTravel;
 module.exports = service;
-//var ObjectID = require('mongodb').ObjectId;
-//var COLNAME = 'Travel';
+
 var travels;
 
 function loadTravel(){
@@ -23,73 +18,60 @@ function loadTravel(){
 		console.log(e);
 	}
 }
+
 function list(userId) {
-	//if(!travels){
+	if(!travels){
 		loadTravel();
-	//}
-	console.log(travels);
-	console.log(travels.map(e=> e.users));
-	console.log(userId);
+	}
 	return Promise.resolve(travels.filter(t => t.users.includes(userId)));
-	/*var deferred = Q.defer();
-	dbProvider.db.collection(COLNAME).find({"users._id": userId}).sort({departDate: 1}).toArray(function (err, travels) {
-		
-		if (err) deferred.reject(err);
-		
-		if (travels) {
-            deferred.resolve(travels);
-        } else {
-             deferred.reject();
-        }
-	});	
-	return deferred.promise;
-	*/
 }
-/*
+
 function add(travel) {
 	
-	var deferred = Q.defer();
-
-	dbProvider.db.collection(COLNAME).insert(travel, (err, result) => {
-
-		if (err){
-			deferred.reject(err);
-		} else {
-			deferred.resolve(result);
-		}
-	})
-	
-	return deferred.promise;
+	if(!travels){
+		loadTravel();
+	}
+	let nextId;
+	try{
+		nextId = parseInt(travels[travels.length-1]._id) + 1;
+		travel._id = nextId;
+		travels.push(travel);
+		console.log(travel);
+		fs.writeFileSync('./server/utils/travels.json', JSON.stringify(travels));
+	} catch(error){
+		console.log(error);
+	}
+	return Promise.resolve(nextId);
 };
 
+
 function update(travel) {
-	
-	var deferred = Q.defer();
-	var id = travel._id;
-	delete travel._id;
-	dbProvider.db.collection(COLNAME).update({ _id:  dbProvider.getID(id) }, travel, {}, (err, nbResult, result) => {
-		console.log(err);
-		if (err){
-			deferred.reject(err);
+	if(!travels) loadTravel();
+	try{
+		let index = travels.findIndex(t => t._id == travel._id);
+		if(index >= 0) {
+			travels[index] = travel;
 		} else {
-			deferred.resolve(result);
+			throw 'travel not found';
 		}
-	})
-	
-	return deferred.promise;
+		fs.writeFileSync('./server/utils/travels.json', JSON.stringify(travels));
+	} catch(error){
+		console.log(error);
+		return Promise.reject(error);
+	}
+	return Promise.resolve('ok');
+
 };
 
 
 function deleteTravel(id) {
-	var deferred = Q.defer();
-	
-	dbProvider.db.collection(COLNAME).remove({ _id: dbProvider.getID(id) }, (err, result) => {
-		if (err){
-			deferred.reject(err);
-		} else {
-			deferred.resolve(result);
-		}
-	})
-	
-	return deferred.promise;
-}*/
+	if(!travels) loadTravel();
+	try{
+		travels.splice(travels.findIndex(t => t._id == id),1);
+		fs.writeFileSync('./server/utils/travels.json', JSON.stringify(travels));
+	} catch(error){
+		console.log(error);
+		return Promise.reject(error);
+	}
+	return Promise.resolve('ok');
+}

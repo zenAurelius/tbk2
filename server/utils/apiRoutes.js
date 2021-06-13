@@ -20,15 +20,18 @@ var router = express.Router();
 //TRAVEL
 var ctrlTravel = require('../controllers/travel.ctrl');
 router.get('/users/:userid/travels', ctrlTravel.list);//auth, 
-//router.post('/travels', ctrlTravel.add);//auth,  
-//router.put('/travels', ctrlTravel.update);//auth, 
-//router.delete('/travels/:travelid', ctrlTravel.deleteTravel);//auth, 
+router.post('/travels', ctrlTravel.add);//auth,  
+router.put('/travels', ctrlTravel.update);//auth, 
+router.delete('/travels/:travelid', ctrlTravel.deleteTravel);//auth, 
 
 //COUNTRY
 var ctrlCountry = require('../controllers/country.ctrl');
 router.get('/countries', ctrlCountry.list);
 router.get('/zones', ctrlCountry.zones);
 
+// EVENEMENT
+var ctrlEvenement = require('../controllers/evenement.ctrl');
+router.get('/travels/:travelId/evenements', ctrlEvenement.list);
 //ACCOUNT
 //var ctrlAccount = require('../controllers/account.ctrl');
 //router.get('/travel/:travelId/accounts', ctrlAccount.list);

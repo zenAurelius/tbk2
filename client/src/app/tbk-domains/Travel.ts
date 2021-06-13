@@ -8,7 +8,7 @@ export class Travel {
     public duration: number | undefined;
     public days: TravelDay[] = [];
     
-    constructor(	public _id: string | undefined,
+    constructor(	public id: string | undefined,
                     public users: any[],
                     public countries: any[],
                     public departDate: Date | undefined,
@@ -40,7 +40,7 @@ export class Travel {
     
     static fromData(data: any){
         
-        return new this(data._id, data.users, data.countries, new Date(data.departDate), new Date(data.returnDate), data.devises);
+        return new this(data.id, data.users, data.countries, new Date(data.departDate), new Date(data.returnDate), data.devises);
         
     }
     

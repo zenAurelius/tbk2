@@ -35,6 +35,7 @@ export class TbkTravelsComponent implements OnInit {
         region:'world',
         resolution :'country',
         backgroundColor: '#81d4fa',
+        colorAxis: {colors: ['#00a863', '#00381a', '#003619']},
     };
 
 
@@ -57,6 +58,7 @@ export class TbkTravelsComponent implements OnInit {
                     data[c.code].value += 1;
                 });
             });
+            this.travels.sort((t1, t2) => (t1.departDate?.getTime() ||0) - (t2.returnDate?.getTime() ||0));
             this.mapColumns = ['Country', 'Value', {role: 'tooltip', type:'string'}];
             this.mapData = Object.entries(data).map(e => [{'v':e[0],'f':(<any>e[1]).label}, (<any>e[1]).value]);
             console.log(this.mapData)
@@ -90,26 +92,37 @@ export class TbkTravelsComponent implements OnInit {
     addTravel(){
         //travel.users.push(this.parent.connectedUser);
         if(this.addedTravel) {
-            this.srvTravel.addTravel(this.addedTravel);
-            this.getTravels();
+            this.srvTravel.addTravel(this.addedTravel)
+                .subscribe(r => {
+                    console.log(r);
+                    this.getTravels();
+                });
             this.shownAction = 'list';
         }
     }
 
     updateTravel(){
-        //travel.users.push(this.parent.connectedUser);
         if(this.addedTravel) {
-            this.srvTravel.updateTravel(this.addedTravel);
-            this.getTravels();
+            console.log('addedTravel', this.addedTravel);
+            this.addedTravel.users.push("1");
+            this.srvTravel.updateTravel(this.addedTravel)
+                .subscribe(r => {
+                    console.log(r);
+                    this.getTravels();
+                });
             this.shownAction = 'list';
         }
     }
 
     deleteTravel(){
         if(this.selectedTravel){
-            this.srvTravel.deleteTravel(this.selectedTravel);
-            this.getTravels();
-            this.selectTravel();
+            this.srvTravel.deleteTravel(this.selectedTravel)
+                .subscribe(r => {
+                    console.log(r);
+                    this.getTravels();
+                    this.selectTravel();
+                });
+            this.shownAction = 'list';
         }
     }
 
