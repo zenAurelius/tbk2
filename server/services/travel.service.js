@@ -19,22 +19,22 @@ function loadTravel(){
 	}
 }
 
-function list(userId) {
+export const list = (userId) => {
 	if(!travels){
 		loadTravel();
 	}
 	return Promise.resolve(travels.filter(t => t.users.includes(userId)));
 }
 
-function add(travel) {
+export const add = (travel) => {
 	
 	if(!travels){
 		loadTravel();
 	}
 	let nextId;
 	try{
-		nextId = parseInt(travels[travels.length-1]._id) + 1;
-		travel._id = nextId;
+		nextId = parseInt(travels[travels.length-1].id) + 1;
+		travel.id = nextId;
 		travels.push(travel);
 		console.log(travel);
 		fs.writeFileSync('./server/utils/travels.json', JSON.stringify(travels));
@@ -45,10 +45,10 @@ function add(travel) {
 };
 
 
-function update(travel) {
+export const update = (travel) => {
 	if(!travels) loadTravel();
 	try{
-		let index = travels.findIndex(t => t._id == travel._id);
+		let index = travels.findIndex(t => t.id == travel.id);
 		if(index >= 0) {
 			travels[index] = travel;
 		} else {
@@ -64,10 +64,10 @@ function update(travel) {
 };
 
 
-function deleteTravel(id) {
+export const deleteTravel = (id) => {
 	if(!travels) loadTravel();
 	try{
-		travels.splice(travels.findIndex(t => t._id == id),1);
+		travels.splice(travels.findIndex(t => t.id == id),1);
 		fs.writeFileSync('./server/utils/travels.json', JSON.stringify(travels));
 	} catch(error){
 		console.log(error);

@@ -1,77 +1,77 @@
-
-var Q = require('q');
-var dbProvider = require('../utils/dbProvider');
+import fs from 'fs';
 
 var service = {};
 service.list = list;
 service.add = add;
-service.deleteOperation = deleteOperation;
+service.delete = deleteOperation;
 service.update = update;
 
 module.exports = service;
 
-var COLNAME = 'Operation';
-var ObjectId = require('mongodb').ObjectId;
+var operations;
 
-function list(id) {
-	var deferred = Q.defer();
-	
-	dbProvider.db.collection(COLNAME).find({"travelId": id}).sort({date:1, order:1}).toArray(function (err, operations) {
-		
-		if (err) deferred.reject(err);
-		
-		if (operations) {
-            deferred.resolve(operations);
-        } else {
-             deferred.reject();
-        }
-	});
-	
-	return deferred.promise;
+function loadOperations(){
+	console.log('load operations...');
+	try{
+		operations = JSON.parse(fs.readFileSync('./server/utils/operations.json', 'utf-8'));
+		console.log('operations size : ' + operations.length);
+	} catch(e){
+		console.log(e);
+	}
 }
 
-function add(operation) {
-	
-	var deferred = Q.defer();
-	dbProvider.db.collection(COLNAME).insert(operation, (err, result) => {
+function list(travelId) {
+	if(!operations){
+		loadOperations();
+	}
+	return Promise.resolve(operations.filter(e => e.travel == travelId));
+}
 
-		if (err){
-			deferred.reject(err);
-		} else {
-			deferred.resolve(result);
-		}
-	})
-	
-	return deferred.promise;
+
+function add(operation) {
+	if(!operations){
+		loadOperations();
+	}
+
+	let nextId;
+	try{
+		nextId = parseInt(operations[operations.length-1].id) + 1;
+		operation.id = nextId;
+		operations.push(operation);
+		console.log(operation);
+		fs.writeFileSync('./server/utils/operations.json', JSON.stringify(operations));
+	} catch(error){
+		console.log(error);
+	}
+	return Promise.resolve(nextId);
 };
 
 function update(operation) {
-	var deferred = Q.defer();
-	var id = operation._id;
-	delete operation._id;
-	dbProvider.db.collection(COLNAME).update({ _id: dbProvider.getID(id) }, operation, {}, (err, result) => {
-
-		if (err){
-			deferred.reject(err);
+	if(!operations) loadOperations();
+	try{
+		let index = operations.findIndex(t => t.id == travel.id);
+		if(index >= 0) {
+			operations[index] = operation;
 		} else {
-			deferred.resolve(result);
+			throw 'operation not found';
 		}
-	})
-	
-	return deferred.promise;
+		fs.writeFileSync('./server/utils/operations.json', JSON.stringify(operations));
+	} catch(error){
+		console.log(error);
+		return Promise.reject(error);
+	}
+	return Promise.resolve('ok');
 }
 
 
-function deleteOperation(id) {
-	var deferred = Q.defer();
-	
-	dbProvider.db.collection(COLNAME).remove({ _id: dbProvider.getID(id) }, (err, result) => {
-		if (err){
-			deferred.reject(err);
-		} else {
-			deferred.resolve(result);
-		}
-	})
-	
-	return deferred.promise;
+service.delete = function deleteEvenement(id) {
+	if(!operations) loadOperations();
+	try{
+		operations.splice(operations.findIndex(t => t.id == id),1);
+		fs.writeFileSync('./server/utils/operations.json', JSON.stringify(operations));
+	} catch(error){
+		console.log(error);
+		return Promise.reject(error);
+	}
+	return Promise.resolve('ok');
 }
