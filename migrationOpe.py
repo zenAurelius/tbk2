@@ -18,7 +18,7 @@ for o in operations :
 	ne['travel'] = o['travelId']
 	ne['date'] = o['date']
 	ne['order'] = o['order']
-	ne['type'] = o['accountCredit']
+	ne['operation'] = o['_id']['$oid']
 	new_evt.append(ne)
 	no = {}
 	no['id'] = o['_id']['$oid']
