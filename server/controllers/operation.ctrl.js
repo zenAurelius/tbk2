@@ -15,9 +15,9 @@ module.exports.add = function(req, res) {
 		.catch(err => res.status(404).send(err) );
 }
 
-module.exports.deleteOperation = function(req, res){
+module.exports.delete = function(req, res){
 	var id = req.params['operationId'];
-	operationService.deleteOperation(id)
+	operationService.delete(id)
 		.then( result => res.status(200).send(result) )
 		.catch(err => res.status(404).send(err) );
 }
